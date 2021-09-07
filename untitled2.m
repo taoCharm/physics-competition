@@ -99,11 +99,13 @@ switch popup_sel_index
         radiusOfBall = 20 * 10^(-3);
         mOfBall = 2.7 * 10^(-3);
         densityOfBall = mOfBall/(4/3 * pi * radiusOfBall^3);
+        density = 2.7;
+        kOfAir = 0.00153;
         
         % calculate the force from the air
-        G_from_air = (1/2) * 1.85 * densityOfBall * (x_label^2+y_label^2)^0.5;
+        G_from_air = kOfAir * (x_label^2+y_label^2)^0.6;       % k * v^(1.2)
         
-        kOfMagnus = (4/3) * 4 * pi^2 * radiusOfBall^3 * rad_label * densityOfBall * (x_label^2+y_label^2);
+        kOfMagnus = (4/3) * 4 * pi^2 * radiusOfBall^3 * rad_label * density * (x_label^2+y_label^2);
         G = G_from_air*10^-6; k = kOfMagnus*10^-6; m = mOfBall;     % G: drag coefficient  k: Magnus coefficient 
         disp(k);
         disp(G);
@@ -152,33 +154,33 @@ switch popup_sel_index
                 height_pingpong = 0.5*first_height_will_solve + 0.5*second_height_will_solve;
                 
                 if height_pingpong > table_tennis_net_height
-                    logInFigureNet = "³É¹¦¹ıÍø";
+                    logInFigureNet = "æˆåŠŸè¿‡ç½‘";
                 elseif height_pingpong == table_tennis_net_height
-                    logInFigureNet = "²ÁÍøÇò£¡";  
+                    logInFigureNet = "æ“¦ç½‘çƒï¼";  
                 else
-                    logInFigureNet = 'Ã»¹ıÍø';
+                    logInFigureNet = 'æ²¡è¿‡ç½‘';
                
                 end
             
             else
-                logInFigureTable = 'Æ¹ÅÒÇòÃ»ÓĞ³É¹¦ÉÏÌ¨£¬¿ÉÒÔ³¢ÊÔĞŞ¸Ä³õËÙ¶È';
+                logInFigureTable = 'ä¹’ä¹“çƒæ²¡æœ‰æˆåŠŸä¸Šå°ï¼Œå¯ä»¥å°è¯•ä¿®æ”¹åˆé€Ÿåº¦';
              
             end
             
             for i_height = 2:n
-                if y(i_height,5)<table_height & y(i_height-1,5)>table_height      % can't write as i£¬i+1£¨i+1 will out of index£©£¬can't i-1£¬i neither£¨i-1 will be 0£©
+                if y(i_height,5)<table_height & y(i_height-1,5)>table_height      % can't write as iï¼Œi+1ï¼ˆi+1 will out of indexï¼‰ï¼Œcan't i-1ï¼Œi neitherï¼ˆi-1 will be 0ï¼‰
 
                     if 10<=y(i_height,1) & y(i_height,1)<=15 & 10<=y(i_height,1) & y(i_height,3)<=15
 
-                        logInFigureTable = 'Æ¹ÅÒÇò³É¹¦ÉÏÌ¨';
+                        logInFigureTable = 'ä¹’ä¹“çƒæˆåŠŸä¸Šå°';
                     else
-                        logInFigureTable = 'Æ¹ÅÒÇòÃ»ÓĞ³É¹¦ÉÏÌ¨£¬¿ÉÒÔ³¢ÊÔĞŞ¸Ä³õËÙ¶È';
+                        logInFigureTable = 'ä¹’ä¹“çƒæ²¡æœ‰æˆåŠŸä¸Šå°ï¼Œå¯ä»¥å°è¯•ä¿®æ”¹åˆé€Ÿåº¦';
                        
                     end  
                     break;
 
                 elseif i_height == n-1             % no point is fit
-                    logInFigureTable = 'Æ¹ÅÒÇòÃ»ÓĞ³É¹¦ÉÏÌ¨£¬¿ÉÒÔ³¢ÊÔĞŞ¸Ä³õËÙ¶È';
+                    logInFigureTable = 'ä¹’ä¹“çƒæ²¡æœ‰æˆåŠŸä¸Šå°ï¼Œå¯ä»¥å°è¯•ä¿®æ”¹åˆé€Ÿåº¦';
                     
                 end
             end
@@ -226,7 +228,7 @@ switch popup_sel_index
         
         % an important step, in which I change the distance of the axis, it
         % means that the plot will be more logical
-        title('Æ¹ÅÒÇò¹ì¼£','fontsize',16);axis([0,25,0,25,0,5]);
+        title('ä¹’ä¹“çƒè½¨è¿¹','fontsize',16);axis([0,25,0,25,0,5]);
        
         xlabel('x/m','FontSize',16); 
         ylabel('y/m','FontSize',16);
@@ -276,11 +278,13 @@ switch popup_sel_index
         mOfBall = 2.7 * 10^(-3);
         densityOfBall = mOfBall/(4/3 * pi * radiusOfBall^3);      
         kOfMagnus = 4/3 * 4 * pi * radiusOfBall * rad_label * densityOfBall * x_label;
+        density = 2.7;
+        kOfAir = 0.00153;
         
         % calculate the force from the air
-        G_from_air = 1/2 * 1.85 *10^-5 * 1.29 * (x_label^2+y_label^2+z_label^2);
+        G_from_air = kOfAir * (x_label^2+y_label^2+z_label^2)^0.5;  
         
-        kOfMagnus = 4/3 * 4 * pi * radiusOfBall * rad_label * densityOfBall * x_label;
+        kOfMagnus = 4/3 * 4 * pi * radiusOfBall * rad_label * density * x_label;
         
         G = G_from_air*10^(-4); k = kOfMagnus*10^(-4); m = mOfBall;
         tspan = [0:0.001:1.5];    % integral time and step
@@ -301,7 +305,7 @@ switch popup_sel_index
         plot(x_pingpong,y_pingpong,'*',x_pingpong,polyval(p,x_pingpong));
         line([10,15],[15,10],'color','r', 'linestyle', '-.', 'linewidth', 2);
         text(3.25,20.5,str_equation,'Interpreter','latex');
-        text(3.25,18.5,'ºìÏßÎªÆ¹ÅÒÇòÍøÍ¶Ó°','Interpreter','latex');
+        text(3.25,18.5,'çº¢çº¿ä¸ºä¹’ä¹“çƒç½‘æŠ•å½±','Interpreter','latex');
         axis([0,25,0,21]);  % Set the range of axis, in this way the text will be shown on a fixed position
 end
 
@@ -367,7 +371,7 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
      set(hObject,'BackgroundColor','white');
 end
 
-set(hObject, 'String', {'»æÖÆÆ¹ÅÒÇò·ÉĞĞÍ¼Ïñ', '»æÖÆÆ¹ÅÒÇòÍ¶Ó°Í¼Ïñ'});
+set(hObject, 'String', {'ç»˜åˆ¶ä¹’ä¹“çƒé£è¡Œå›¾åƒ', 'ç»˜åˆ¶ä¹’ä¹“çƒæŠ•å½±å›¾åƒ'});
 
 
 
