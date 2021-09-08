@@ -169,23 +169,26 @@ switch popup_sel_index
              
             end
             
-            for i_height = 2:n
-                if y(i_height,5)<table_height & y(i_height-1,5)>table_height      % can't write as i，i+1（i+1 will out of index），can't i-1，i neither（i-1 will be 0）
+        for i_height = 2:n
+            if y(i_height,5)<table_height & y(i_height-1,5)>table_height      % can't write as i，i+1（i+1 will out of index），can't i-1，i neither（i-1 will be 0）
+                disp(y(i_height,5));
+                disp(y(i_height-1,5));
+                disp(y(i_height,1));
+                disp(y(i_height,3));
+                if -5<=-y(i_height,1)+y(i_height,3) & -y(i_height,1)+y(i_height,3)<=5 & 15<=y(i_height,3)+y(i_height,1) & y(i_height,3)y(i_height,1)<=35
 
-                    if 10<=y(i_height,1) & y(i_height,1)<=15 & 10<=y(i_height,1) & y(i_height,3)<=15
-
-                        logInFigureTable = '乒乓球成功上台';
-                    else
-                        logInFigureTable = '乒乓球没有成功上台，可以尝试修改初速度';
-                       
-                    end  
-                    break;
-
-                elseif i_height == n-1             % no point is fit
+                    logInFigureTable = '乒乓球成功上台';
+                else
                     logInFigureTable = '乒乓球没有成功上台，可以尝试修改初速度';
-                    
-                end
+
+                end  
+                break;
+
+            elseif i_height == n             % no point is fit
+                logInFigureTable = '乒乓球没有成功上台，可以尝试修改初速度';
+
             end
+        end
             
         end    
         
